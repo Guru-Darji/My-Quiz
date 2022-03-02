@@ -1,37 +1,84 @@
-// var startEl = document.querySelector('#start');
-// var beginBtn = document.querySelector('#begin');
-// var gameEl = document.querySelector('#game');
-// var endEl = document.querySelector('#end');
-// var initialsInput = document.querySelector('#initials');
+var quizAll = document.getElementById("quiz"); //
+var theResultsEl = document.getElementById("checkResult"); //
+var theFinalScore = document.getElementById("finalScore"); //  
+var quizOverDiv = document.getElementById("quizOver"); //
+var questionEl = document.getElementById("questions"); //
+var buttonA = document.getElementById("a");
+var buttonB = document.getElementById("b");
+var buttonC = document.getElementById("c");
+var buttonD = document.getElementById("d");
+var quizTimer = document.getElementById("timer"); //
+var startQuizButton = document.getElementById("startQuizBtn"); //
+var startQuizDiv = document.getElementById("masterDiv"); // 
+var highScoreDiv = document.getElementById("highScoreStorage"); //
+var highScorePage = document.getElementById("highscorePage"); //
+var highscoreInputName = document.getElementById("initials"); //
+var highscoreShowName = document.getElementById("highscoreInitials"); //
+var submitScoreBtn = document.getElementById("turnInScore"); //
+var highscoreDisplayScore = document.getElementById("highScoreScore"); //
 
-var questions = [
+
+var theQuizQuestions = [
     {
-        theQuestions: "question 1",
-        answerChoices: ["q1", "q2", "q3", "q4"],
-        correctAnswer: "answer 1"
+        questions: "question 1",
+        choiceA:"",
+        choiceB:"",
+        choiceC:"",
+        choiceD:"",
+        correctAnswer: "a"
     },
 
     {
-        theQuestions: "question 2",
-        answerChoices: ["q1", "q2", "q3", "q4"],
-        correctAnswer: "answer 2"
+        questions: "question 2",
+        choiceA:
+        choiceB:
+        choiceC:
+        choiceD:
+        correctAnswer: "b"
     },
 
     {
-        theQuestions: "question 3",
-        answerChoices: ["q1", "q2", "q3", "q4"],
-        correctAnswer: "answer 3"
+        questions: "question 3",
+        choiceA:"",
+        choiceB:"",
+        choiceC:"",
+        choiceD:"",
+        correctAnswer: "c"
     },
 
     {
-        theQuestions: "question 4",
-        answerChoices: ["q1", "q2", "q3", "q4"],
-        correctAnswer: "answer 4"
+        questions: "question 4",
+        choiceA:"",
+        choiceB:"",
+        choiceC:"",
+        choiceD:"",
+        correctAnswer: "d"
     },
 
     {
-        theQuestions: "question 5",
-        answerChoices: ["q1", "q2", "q3", "q4"],
-        correctAnswer: "answer 5"
+        questions: "question 5",
+        choiceA:"",
+        choiceB:"",
+        choiceC:"",
+        choiceD:"",
+        correctAnswer: "d"
     },
-]
+];
+
+var lastQuestionIndex = theQuizQuestions.length;
+var currentQuestionIndex = 0;
+var timeThatIsLeft = 76;
+var timeInterval;
+var theScore = 0;
+var right;
+
+
+
+// timer.addEventListener("click", function(){
+// if (ceaseInterval === 0) {
+//     ceaseInterval = setInterval(function() {
+//         secondsLeft--;
+//         currentTime.
+//     }
+// }
+});
