@@ -1,0 +1,70 @@
+:root{
+    background-color:#af3ad3
+
+    }
+    
+
+
+    #starting{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #h2{
+        font-family: sans-serif;
+        margin-top: -.5rem;
+    }
+    #input{
+        text-align: center;
+    }
+
+    #starterButton {
+
+        text-align: center;
+        font-family: sans-serif;
+        background-color: #5b0296;
+        border-radius: 10px;
+        border: 3px double #cccccc;
+        color: #eeeeee;
+        text-align: center;
+        font-size: 15px;
+        padding: 20px;
+        width: 200px;
+        margin-top: 200px;
+      }
+
+      h1 {
+        text-align: center;
+        font-style: bolder;
+        font-size: 50px;
+      }
+      
+      #starting {
+        text-align: center;
+        margin: 25px;
+        border: 15px;
+      }
+      
+      #quiz {
+        text-align: center;
+        margin: 25px;
+        border: 15px;
+      }
+      
+      #title {
+        border-style: dotted;
+        
+      }
+      
+      #done {
+        text-align: center;
+        margin: 25px;
+        border: 15px;
+      }
+      
+      #theScore {
+        margin-top: 20px;
+        border: 15px;
+        color:white;
+      }

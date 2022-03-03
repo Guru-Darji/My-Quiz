@@ -1,63 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
   <title>Coding Quiz</title>
-
 </head>
-
 <body>
+  <h1>This is a Quiz</h1>
 
-  <div class="masterDiv">
-    <div id="start">
-      <h2>The Quiz</h2>
-      <h2>Answer questions correctly, if you get it wrong you lose 10 seconds</h2>
-      <ul id="questionChoices"></ul>
-      <button id="startQuizBtn">Start Quiz</button>
-      <button id="startHighscore" onclick="showHighscore()">High Scrore</button>
-    </div>
-
-
-    <div id="quiz">
-      <div id="timer">The Time Left:</div>
-      <div id="questions">
-        <p>The Questions</p>
-      </div>
-      <button id="a" onclick="checkTheAnswer('a')">A</button>
-      <button id="b" onclick="checkTheAnswer('b')">B</button>
-      <button id="c" onclick="checkTheAnswer('c')">C</button>
-      <button id="d" onclick="checkTheAnswer('d')">D</button>
-      <div id="checkResult"></div>
-    </div>
-
-
-    <div id="quizOver">
-      <div id="finalScore"></div>
-      <input type="text" size="40" placeholder="Please enter your Initials" name="initials" id="initials" />
-      <button id="turnInScore">Submit Score</button>
-    </div>
-
-    <div id="highScoreStorage">
-      <div id="highScorePage">
-        <div id="highScoreHeader">
-          <h3>Player Initials</h3>
-          <h3>Score</h3>
-        </div>
-
-        <div id="highScoreInitials"></div>
-        <div id="highScoreScore"></div>
-      </div>
-
-
-    </div>
-
+  <div id="starting">
+    <h2>Start</h2>
+    <button id="starterButton">Goodluck on your Quiz</button>
   </div>
+
+  <div id="quiz">
+    <h2 id="title">Quiz</h2>
+     <div id="questions"></div>
+      <div id="theScore"></div>
+  </div>
+
+  <form id="done">
+    <h2>End Screen</h2>
+    <div id="doneScore"></div>
+    <div>
+      <label for="playerInitials ">Initials: </label>
+      <input type="text" id="playerInitials " />
+      <button type="submit">Submit</button>
+    </div>
+  </form>
 
   <script src="./script.js"></script>
 </body>
-
 </html>

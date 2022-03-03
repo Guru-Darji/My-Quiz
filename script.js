@@ -1,172 +1,156 @@
-var quizAll = document.getElementById("quiz"); //
-var theResultsEl = document.getElementById("checkResult"); //
-var theFinalScore = document.getElementById("finalScore"); //  
-var quizOverDiv = document.getElementById("quizOver"); //
-var questionEl = document.getElementById("questions"); //
-var btnA = document.getElementById("a");
-var btnB = document.getElementById("b");
-var btnC = document.getElementById("c");
-var btnD = document.getElementById("d");
-var quizTimer = document.getElementById("timer"); //
-var startQuizBtn = document.getElementById("startQuizBtn"); //
-var startQuizDiv = document.getElementById("masterDiv"); // 
-var highScoreStorage = document.getElementById("highScoreStorage"); //
-var highScorePage = document.getElementById("highscorePage"); //
-var highscoreInputName = document.getElementById("initials"); //
-var highscoreShowName = document.getElementById("highscoreInitials"); //
-var turnInScoreBtn = document.getElementById("turnInScore"); //
-var highscoreScoreScore = document.getElementById("highScoreScore"); //
+const startingEl = document.querySelector('#starting');
+const quizEl = document.querySelector('#quiz');
+const doneEl = document.querySelector('#done');
+const questionsEl = document.querySelector('#questions');
+const titleEl = document.querySelector('#title');
+const theScoreEl = document.querySelector('#theScore');
+const doneScoreEl = document.querySelector('#doneScore');
+const beginButton = document.querySelector('#starterButton');
+const playerInitialsInput = document.querySelector('#playerInitials');
 
+var cursor = 0;
+var score = 100;
+var seconds = 60;
+var timer;
 
-var theQuizQuestions = [
-    {
-        questions: "question 1",
-        choiceA:"filler",
-        choiceB:"filler",
-        choiceC:"filler",
-        choiceD:"filler",
-        correctAnswer: "a"
-    },
-
-    {
-        questions: "question 2",
-        choiceA:"filler",
-        choiceB:"filler",
-        choiceC:"filler",
-        choiceD:"filler",
-        correctAnswer: "2"
-    },
-
-    {
-        questions: "question 3",
-        choiceA:"filler",
-        choiceB:"filler",
-        choiceC:"filler",
-        choiceD:"filler",
-        correctAnswer: "c"
-    },
-
-    {
-        questions: "question 4",
-        choiceA:"filler",
-        choiceB:"filler",
-        choiceC:"filler",
-        choiceD:"filler",
-        correctAnswer: "d"
-    },
-
-    {
-        questions: "question 5",
-        choiceA:"filler",
-        choiceB:"filler",
-        choiceC:"filler",
-        choiceD:"filler",
-        correctAnswer: "d"
-    },
+const questions = [
+  {
+    questionText: "What position is planet earth?",
+    options: [
+      "3rd",
+      "4th",
+      "5th",
+      "th",
+    ],
+    rightAnswer: "3rd"
+  },
+  {
+    questionText: "How many planets are in our solar system?",
+    options: [
+      "7",
+      "8",
+      "9",
+      "10",
+    ],
+    rightAnswer: "8"
+  },
+  {
+    questionText: "Which ocean is off the California coast?",
+    options: [
+      "Atlantic",
+      "Indian",
+      "Pacific",
+      "Antarctic",
+    ],
+    rightAnswer: "Pacific"
+  },
+  {
+    questionText: "How many days are in a year??",
+    options: [
+      "362",
+      "363",
+      "364",
+      "365",
+    ],
+    rightAnswer: "365"
+  },
+  {
+    questionText: "Which planet in our Solar System is known for having a ring?",
+    options: [
+      "Venus",
+      "Mars",
+      "Earth",
+      "Saturn",
+    ],
+    rightAnswer: "Saturn"
+  }
 ];
 
-var lastQuestionIndex = theQuizQuestions.length;
-var currentQuestionIndex = 0;
-var timeThatIsLeft = 76;
-var timeInterval;
-var theScore = 0;
-var right;
 
-function generateTheQuizQuestions(){
-    quizOverDiv.style.display = "none";
-    if (currentQuestionIndex === lastQuestionIndex){
-        return showTheScore();
-    } 
-    var currentQuestion = theQuizQuestions[currentQuestionIndex];
-    questionEl.innerHTML = "<p>" + currentQuestion.questions + "</p>";
-    btnA.innerHTML = currentQuestion.choiceA;
-    btnB.innerHTML = currentQuestion.choiceB;
-    btnC.innerHTML = currentQuestion.choiceC;
-    btnD.innerHTML = currentQuestion.choiceD;
+// Screen displays || Render
+function beginScreen() {
+  startingEl.style.display = "block";
+  quizEl.style.display = "none";
+  doneEl.style.display = "none";
+}
+
+function quizScreen() {
+  startingEl.style.display = "none";
+  quizEl.style.display = "block";
+  doneEl.style.display = "none";
+  showQuestions();
+
+  theScoreEl.textContent = seconds;
+
+  timer = setInterval(function () {
+    seconds--;
+    theScoreEl.textContent = seconds;
+    console.log("Time Left:", seconds);
+    if (seconds < 0) {
+      clearInterval(timer)
+    }
+  }, 1000);
 };
 
 
-function startTheQuiz(){
-    quizOverDiv.style.display = "none";
-    startQuizDiv.style.display = "none";
-    generateTheQuizQuestions();
-
-
-    timeInterval =setInterval(function(){
-        timeThatIsLeft--;
-        quizOverDiv.textContent = "The Time left: " + timeThatIsLeft;
-
-        if(timeThatIsLeft === 0){
-            clearInterval(timeInterval);
-            showTheScore();
-        }
-
-
-
-
-    },1000);
-    quizAll.style.display = "block";
+function showQuestions() {
+  questionsEl.innerHTML = '';
+  const question = questions[cursor];
+  titleEl.textContent = question.questionText;
+  question.options.forEach((item, i) => {
+    var answerButton = document.createElement('button');
+    answerButton.textContent = i + 1 + ". " + item;
+    answerButton.value = item;
+    questionsEl.appendChild(answerButton);
+  })
 }
 
-function showTheScore(){
-    quizAll.style.display = "none";
-    quizOverDiv.style.display = "none";
-    clearInterval(timeInterval);
-    highscoreInputName.value = "";
-    theFinalScore.innerHTML = "Your score is " + theScore + "out of " + theQuizQuestions.length;
+function doneScreen() {
+  startingEl.style.display = "none";
+  quizEl.style.display = "none";
+  doneEl.style.display = "block";
+  doneScoreEl.textContent = seconds;
+  clearInterval(timer);
 }
 
-turnInScoreBtn.addEventListener("click", function highScore(){
 
-    if(highscoreInputName.value === ""){
-        alert("You can't leave the Initials black");
-        return false;
-    }else{
-        var theSavedHighscores = JSON.parse(localStorage.getItem("theSavedHighscores")) || [];
-        var currentPlayer = highscoreInputName.value.trim();
-        var theCurrentHighscore = {
-            name : currentPlayer,
-            score : score
-        }    
+function init() {
+  beginScreen();
+}
 
-        quizOverDiv.style.display = "none";
-        highScoreStorage.style.display = "flex";
-        highScoreDiv.style.display = "block";
-        endGameBtns.style.display = "flex";
-    
-        savedHighscores.push(currentHighscore);
-        localStorage.setItem("theSavedHighscores", JSON.stringify(theSavedHighscores));
-        generateTheHighscores();
-    }    
+function saveHighScore(event){
+  event.preventDefault();
+  let lastScore = doneScoreEl.textContent
+  let playerInitialsEl = document.querySelector("#playerInitials");
+  localStorage.setItem("lastScore", JSON.stringify(lastScore));
+  localStorage.setItem("playerInitials", JSON.stringify(playerInitialsEl.value));
+  seconds = 60;
+  playerInitialsEl.value = '';
+
+  };
+  function init(){
+    beginScreen();
+  }
+
+
+
+beginButton.addEventListener('click', quizScreen);
+quizEl.addEventListener('click', function (event) {
+  if (event.target.matches('button')) {
+    var buttonValue = event.target.value;
+    var rightAnswer = questions[cursor].rightAnswer;
+    if(buttonValue !== rightAnswer){
+      seconds -= 10;
+    };
+    if(seconds <= 0){
+      doneScreen();
+    };
+    cursor++;
+    if (cursor < questions.length) {
+      showQuestions();
+    } else {
+      doneScreen();
+    };
+  }
 });
-
-function generateTheHighscores(){
-    highscoreInputName.innerHTML = "";
-    thehighscoreScoreScore.innerHTML = "";
-    var theHighscores = JSON.parse(localStorage.getItem("savedHighscores")) || [];
-    for (i=0; i<theHighscores.length; i++){
-        var newNameSpan = document.createElement("li");
-        var newScoreSpan = document.createElement("li");
-        newNameSpan.textContent = theHighscores[i].name;
-        newScoreSpan.textContent = theHighscores[i].score;
-        highscoreInputName.appendChild(newNameSpan);
-        highscoreScoreScore.appendChild(newScoreSpan);
-    }
-}    
-
-
-function showTheHighscore(){
-    startQuizDiv.style.display = "none"
-    quizOverDiv.style.display = "none";
-    highScoreStorage.style.display = "flex";
-    highScorePage.style.display = "block";
-    generateTheHighscores();
-}
-
-
-
-
-
-
-
-startQuizBtn.addEventListener("click",startQuiz);
+init();
